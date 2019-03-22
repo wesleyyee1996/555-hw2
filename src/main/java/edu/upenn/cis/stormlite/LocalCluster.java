@@ -28,8 +28,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -39,6 +39,7 @@ import edu.upenn.cis.stormlite.bolt.OutputCollector;
 import edu.upenn.cis.stormlite.routers.IStreamRouter;
 import edu.upenn.cis.stormlite.spout.IRichSpout;
 import edu.upenn.cis.stormlite.spout.SpoutOutputCollector;
+import edu.upenn.cis.stormlite.tasks.ITask;
 import edu.upenn.cis.stormlite.tasks.SpoutTask;
 
 /**
@@ -69,7 +70,7 @@ public class LocalCluster implements Runnable {
 	ObjectMapper mapper = new ObjectMapper();
 	
 	ExecutorService executor = Executors.newFixedThreadPool(1);
-	Queue<Runnable> taskQueue = new ConcurrentLinkedQueue<Runnable>();
+	Queue<ITask> taskQueue = new ConcurrentLinkedQueue<>();
 	
 
 	public void submitTopology(String name, Config config, 

@@ -27,7 +27,7 @@ import edu.upenn.cis.stormlite.tuple.Tuple;
  * @author zives
  *
  */
-public class BoltTask implements Runnable {
+public class BoltTask implements ITask {
 	
 	IRichBolt bolt;
 	Tuple tuple;
@@ -39,7 +39,14 @@ public class BoltTask implements Runnable {
 
 	@Override
 	public void run() {
-		bolt.execute(tuple);
+		synchronized (bolt) {
+			bolt.execute(tuple);
+		}
+	}
+
+	@Override
+	public String getStream() {
+		return bolt.getExecutorId();
 	}
 
 }
