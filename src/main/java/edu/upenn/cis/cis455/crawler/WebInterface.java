@@ -26,7 +26,7 @@ public class WebInterface {
             }
         }
         
-        port(8080);
+        port(45555);
         StorageInterface database = StorageFactory.getDatabaseInstance(args[0]);
         
         LoginFilter testIfLoggedIn = new LoginFilter(database);

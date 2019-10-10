@@ -16,8 +16,8 @@ public class URLInfo {
 		docURL = docURL.trim();
 		
 		if (docURL.startsWith("https://")) {
-		    this.isSecure = true;
-		    docURL.replaceFirst("https:", "http:");
+		    isSecure = true;
+		    docURL = docURL.replaceFirst("https:", "http:");
 		}
 		
 		if(!docURL.startsWith("http://") || docURL.length() < 8)
@@ -47,11 +47,11 @@ public class URLInfo {
 			try{
 				portNo = Integer.parseInt(comp[1].trim());
 			}catch(NumberFormatException nfe){
-				portNo = 80;
+				portNo = isSecure ? 443 : 80;
 			}
 		}else{
 			hostName = address;
-			portNo = 80;
+			portNo = isSecure ? 443 : 80;
 		}
 	}
 	
@@ -92,10 +92,16 @@ public class URLInfo {
 	}
 
     public boolean isSecure() {
-        return this.isSecure;
+        return isSecure;
     }
     
     public void setSecure(boolean sec) {
-        this.isSecure = sec;
+        isSecure = sec;
+    }
+    
+    public String toString() {
+    	return (isSecure ? "https://" : "http://")
+    		   + hostName + ":"
+    		   + portNo + filePath;
     }
 }
