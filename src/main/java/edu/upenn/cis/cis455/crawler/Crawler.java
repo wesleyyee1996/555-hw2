@@ -1,18 +1,6 @@
 package edu.upenn.cis.cis455.crawler;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-
-import javax.net.ssl.HttpsURLConnection;
-
-import edu.upenn.cis.cis455.crawler.info.RobotsTxtInfo;
-import edu.upenn.cis.cis455.crawler.info.URLInfo;
+import edu.upenn.cis.cis455.crawler.utils.URLInfo;
 import edu.upenn.cis.cis455.storage.StorageFactory;
 import edu.upenn.cis.cis455.storage.StorageInterface;
 
@@ -87,20 +75,20 @@ public class Crawler implements CrawlMaster {
             System.out.println("Usage: Crawler {start URL} {database environment path} {max doc size in MB} {number of files to index}");
             System.exit(1);
         }
-        
+
         System.out.println("Crawler starting");
         String startUrl = args[0];
         String envPath = args[1];
         Integer size = Integer.valueOf(args[2]);
         Integer count = args.length == 4 ? Integer.valueOf(args[3]) : 100;
-        
+
         StorageInterface db = StorageFactory.getDatabaseInstance(envPath);
-        
+
         Crawler crawler = new Crawler(startUrl, db, size, count);
-        
+
         System.out.println("Starting crawl of " + count + " documents, starting at " + startUrl);
         crawler.start();
-        
+
         while (!crawler.isDone())
             try {
                 Thread.sleep(10);
@@ -108,9 +96,9 @@ public class Crawler implements CrawlMaster {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-            
+
         // TODO: final shutdown
-            
+
         System.out.println("Done crawling!");
     }
 

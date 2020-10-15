@@ -1,6 +1,6 @@
 package edu.upenn.cis.cis455.crawler;
 
-import edu.upenn.cis.cis455.crawler.info.URLInfo;
+import edu.upenn.cis.cis455.crawler.utils.URLInfo;
 
 public interface CrawlMaster {
     /**

@@ -16,7 +16,7 @@ public class WebInterface {
             System.out.println("Syntax: WebInterface {path} {root}");
             System.exit(1);
         }
-        
+
         if (!Files.exists(Paths.get(args[0]))) {
             try {
                 Files.createDirectory(Paths.get(args[0]));
@@ -25,23 +25,23 @@ public class WebInterface {
                 e.printStackTrace();
             }
         }
-        
+
         port(45555);
         StorageInterface database = StorageFactory.getDatabaseInstance(args[0]);
-        
+
         LoginFilter testIfLoggedIn = new LoginFilter(database);
-        
+
         if (args.length == 2) {
             staticFiles.externalLocation(args[1]);
             staticFileLocation(args[1]);
         }
 
-            
+
         before("/*", "POST", testIfLoggedIn);
         // TODO:  add /register, /logout, /index.html, /, /lookup
         //post("/register", new RegistrationHandler(database));
         post("/login", new LoginHandler(database));
-        
+
         awaitInitialization();
     }
 }

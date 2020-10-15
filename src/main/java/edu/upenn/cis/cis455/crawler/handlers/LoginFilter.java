@@ -12,32 +12,25 @@ import spark.Response;
 public class LoginFilter implements Filter {
     Logger logger = LogManager.getLogger(LoginFilter.class);
     
-    public LoginFilter(StorageInterface db) {
-        
-    }
+    public LoginFilter(StorageInterface db) {}
 
     @Override
     public void handle(Request req, Response response) throws Exception {
+        // Some basic logic to get you started
         if (!req.pathInfo().equals("/login-form.html") &&
-        !req.pathInfo().equals("/login") &&
-        !req.pathInfo().equals("/register") &&
-        !req.pathInfo().equals("/register.html")
-        ) {
+                !req.pathInfo().equals("/login") &&
+                !req.pathInfo().equals("/register") &&
+                !req.pathInfo().equals("/register.html")) {
             logger.info("Request is NOT login/registration");
             if (req.session(false) == null) {
-//                logger.info
-System.err.println("Not logged in - redirecting!");
+                logger.info("Not logged in - redirecting!");
                 response.redirect("/login-form.html");
             } else {
-//                logger.info
-System.err.println("Logged in!");
+                logger.info("Logged in!");
                 req.attribute("user", req.session().attribute("user"));
             }
-
         } else {
-//            logger.info
-System.err.println("Request is LOGIN FORM");
+            logger.info("Request is LOGIN FORM");
         }
-        
     }
 }

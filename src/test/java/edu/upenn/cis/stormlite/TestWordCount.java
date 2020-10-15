@@ -53,10 +53,10 @@ public class TestWordCount {
 
         // Only one source ("spout") for the words
         builder.setSpout(WORD_SPOUT, spout, 1);
-        
+
         // Four parallel word counters, each of which gets specific words
         builder.setBolt(COUNT_BOLT, bolt, 4).fieldsGrouping(WORD_SPOUT, new Fields("word"));
-        
+
         // A single printer bolt (and officially we round-robin)
         builder.setBolt(PRINT_BOLT, printer, 4).shuffleGrouping(COUNT_BOLT);
 
@@ -66,7 +66,7 @@ public class TestWordCount {
         ObjectMapper mapper = new ObjectMapper();
 		try {
 			String str = mapper.writeValueAsString(topo);
-			
+
 			System.out.println("The StormLite topology is:\n" + str);
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block

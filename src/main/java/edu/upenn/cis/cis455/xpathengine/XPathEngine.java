@@ -1,7 +1,5 @@
 package edu.upenn.cis.cis455.xpathengine;
 
-import edu.upenn.cis.cis455.model.OccurrenceEvent;
-
 interface XPathEngine {
 
 
