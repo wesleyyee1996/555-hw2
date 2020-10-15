@@ -9,7 +9,7 @@ import edu.upenn.cis.cis455.storage.StorageInterface;
 
 public class LoginHandler implements Route {
     StorageInterface db;
-    
+
     public LoginHandler(StorageInterface db) {
         this.db = db;
     }
@@ -18,12 +18,12 @@ public class LoginHandler implements Route {
     public String handle(Request req, Response resp) throws HaltException {
         String user = req.queryParams("username");
         String pass = req.queryParams("password");
-        
+
         System.err.println("Login request for " + user + " and " + pass);
         if (db.getSessionForUser(user, pass)) {
             System.err.println("Logged in!");
             Session session = req.session();
-            
+
             session.attribute("user", user);
             session.attribute("password", pass);
             resp.redirect("/index.html");
@@ -32,7 +32,6 @@ public class LoginHandler implements Route {
             resp.redirect("/login-form.html");
         }
 
-            
         return "";
     }
 }
