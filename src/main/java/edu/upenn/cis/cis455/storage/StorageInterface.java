@@ -13,14 +13,9 @@ public interface StorageInterface {
     public int addDocument(String url, String documentContents);
 
     /**
-     * How many keywords so far?
+     * Retrieves a document's contents by URL
      */
-    public int getLexiconSize();
-
-    /**
-     * Gets the ID of a word (adding a new ID if this is a new word)
-     */
-    public int addOrGetKeywordId(String keyword);
+    public String getDocument(String url);
 
     /**
      * Adds a user and returns an ID
@@ -31,11 +26,6 @@ public interface StorageInterface {
      * Tries to log in the user, or else throws a HaltException
      */
     public boolean getSessionForUser(String username, String password);
-
-    /**
-     * Retrieves a document's contents by URL
-     */
-    public String getDocument(String url);
 
     /**
      * Shuts down / flushes / closes the storage system
