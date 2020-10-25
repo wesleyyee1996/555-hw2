@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Configuration:
   status: warn
 
@@ -13,3 +14,34 @@ Configuration:
       level: error
       AppenderRef:
         ref: Console
+=======
+Configuration:
+  Appenders:
+    Console:
+      PatternLayout:
+        pattern: '%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n'
+      name: Console
+      target: SYSTEM_OUT
+    File:
+      PatternLayout:
+        pattern: '%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n'
+      name: File
+      fileName: www/app.log
+  Loggers:
+    Root:
+      AppenderRef:
+      - ref: Console
+      - ref: File
+      level: trace
+  RollingFile:
+    - name: LogToRollingFile
+      fileName: logs/app.log
+      filePattern: "logs/$${date:yyyy-MM}/app-%d{MM-dd-yy}-%i.log.gz"
+      PatternLayout:
+        pattern: '%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n'
+      Policies:
+        SizeBasedTriggeringPolicy:
+          size: 10MB
+        DefaultRollOverStrategy:
+          max:10
+>>>>>>> cf6f0420a76e13f04c4aede5d9964b2400aab3b1

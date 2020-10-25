@@ -1,5 +1,8 @@
 target/*
 /target/
+<<<<<<< HEAD
 database/
+=======
+>>>>>>> cf6f0420a76e13f04c4aede5d9964b2400aab3b1
 app.log
 .DS_Store
